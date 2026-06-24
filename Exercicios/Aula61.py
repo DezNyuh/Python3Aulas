@@ -1,34 +1,58 @@
 while True:
-
-    cpf = input('Digite um CPF: ')
-
     try:
+        cpf_enviado = input('Digite um CPF: ')
+        cpf_enviado = cpf_enviado.replace('.', '').replace('-', '')
 
-        cpf = cpf.replace('.', '').replace('-', '')
+        repetiu = cpf_enviado[0] * len(cpf_enviado)
+        print(repetiu)
+        if cpf_enviado == repetiu:
+            print('CPF Inválido vi!')
+            continue
 
-        if len(cpf) > 9 or not cpf.isdigit():
-             print('Digite uma sequência de 8 números')
-             continue
-        
-        if cpf.isdigit():
-            multiplicação = 10
-            resultado_soma = 0
+        if len(cpf_enviado) != 11 or not cpf_enviado.isdigit():
+            print('Digite um CPF válido')
+            continue
 
-            for numero in cpf:
-                numero = int(numero)
-                resultado_mult = numero * multiplicação
-                multiplicação -= 1
-                resultado_soma += resultado_mult
+        cpf_base = cpf_enviado[:9]
 
-            if multiplicação <= 2:
-                resultado_x10 = resultado_soma * 10
-                resultado_rest = resultado_x10 % 11
+        # Primeiro dígito
+        peso = 10
+        soma_primeiro_digito = 0
 
-            if resultado_rest > 9:
-                        resultado_rest = 0
-    
-            print (resultado_rest)
+        for digito in cpf_base:
+            soma_primeiro_digito += int(digito) * peso
+            peso -= 1
+
+        primeiro_digito = (soma_primeiro_digito * 10) % 11
+
+        if primeiro_digito > 9:
+            primeiro_digito = 0
+
+        print(f'Primeiro dígito: {primeiro_digito}')
+
+        # Segundo dígito
+        cpf_para_segundo_digito = cpf_base + str(primeiro_digito)
+
+        peso = 11
+        soma_segundo_digito = 0
+
+        for digito in cpf_para_segundo_digito:
+            soma_segundo_digito += int(digito) * peso
+            peso -= 1
+
+        segundo_digito = (soma_segundo_digito * 10) % 11
+
+        if segundo_digito > 9:
+            segundo_digito = 0
+
+        print(f'Segundo dígito: {segundo_digito}')
+
+        novo_cpf = f'{cpf_base}{primeiro_digito}{segundo_digito}'
+        if novo_cpf == cpf_enviado:
+            print('CPF Válido!')
+        else:
+            print('CPF Inválido!')
+
 
     except Exception as erro:
-        print('Erro:', erro)
-
+        print(f'Erro: {erro}')
