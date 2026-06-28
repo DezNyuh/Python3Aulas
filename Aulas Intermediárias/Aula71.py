@@ -5,7 +5,6 @@ print(x, y, resto)
 #    return x + y
 
 def soma(*args):
-    print(args)
     total = 0
     for numero in args:
         total += numero
