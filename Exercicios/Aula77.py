@@ -30,7 +30,7 @@ def questao(x):
     resposta_escolhida = perguntas[x]['Opções'][escolha_1 - 1]
 
     if resposta_escolhida == perguntas[x]['Resposta']:
-        print('Você acertou!\n')
+        print('Você acertou!!\n')
         return True
     else:
         print('Você errou!\n')
