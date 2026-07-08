@@ -13,4 +13,4 @@ except (TypeError + IndexError):
 except Exception:
     print('ERRO DESCONHECIDO')
 
-print('CONTINUAR')
+print('CONTINUAR!')
