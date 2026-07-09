@@ -4,7 +4,7 @@ __all__ = [
     'nova_variavel',
 ]
 
-from .modulo_b import fala_oi
+# from .modulo_b import fala_oi
 
 variavel = 'Alguma coisa'
 nova_variavel = 'OK'
