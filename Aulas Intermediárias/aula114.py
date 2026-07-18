@@ -1,13 +1,27 @@
-def recursiva(inicio=0, fim=4):
-    print(inicio, fim)
-    # Caso base
-    if inicio >= fim:
-        return fim
+# import sys
+
+# sys.setrecursionlimit(1004)
+
+# def recursiva(inicio=0, fim=4):
+#     print(inicio, fim)
+#     # Caso base
+#     if inicio >= fim:
+#         return fim
 
 
-    # Caso recursivo
-    # Contar até chegar ao final
-    inicio += 1
-    return recursiva(inicio, fim)
+#     # Caso recursivo
+#     # Contar até chegar ao final
+#     inicio += 1
+#     return recursiva(inicio, fim)
 
-print(recursiva())
+# print(recursiva(0, 1000))
+
+def factorial(n):
+    if n <= 1:
+        return 1
+    
+    return n * factorial(n - 1)
+
+print(factorial(5))
+print(factorial(10))
+print(factorial(100))
