@@ -9,19 +9,36 @@
 # refazer = todo ['fazer café']
 # refazer = todo ['fazer café', 'caminhar']
 import os
+import json
+
+PATH_DIR = 'G:\\Curso Python 3+\\Exercicios\\'
+NAME_DIR = 'aula119.json'
+caminho_arquivo = PATH_DIR + NAME_DIR
 
 def print_lista(lista):
     for i in lista:
         print(i)
 
+def escrever_JSON(lista):
+    with open(caminho_arquivo, 'w', encoding='utf8') as arquivo:
+        json.dump(lista, arquivo)
 
 lista = []
 desfazer = []
 
+try:    
+    with open(caminho_arquivo, 'r', encoding='utf8') as arquivo:
+        lista = json.load(arquivo)
+except json.decoder.JSONDecodeError:
+    escrever_JSON(lista)
+except FileNotFoundError:
+    escrever_JSON(lista)
+
+
 while True:
     print('\nComandos: listar, desfazer, refazer')
     comando = input('Digite uma tarefa ou comando: ')
-    
+
     if comando == "listar":
         if not lista:
             print('\nTAREFAS: Nenhuma tarefa cadastrada.')
@@ -35,6 +52,7 @@ while True:
             print('\nNada a desfazer')
         else:
             desfazer.append(lista.pop())
+            escrever_JSON(lista)
         print_lista(lista)
         continue
 
@@ -43,6 +61,7 @@ while True:
             print('\nNada a refazer')
         else:
             lista.append(desfazer.pop())
+            escrever_JSON(lista)
         print_lista(lista)
         continue
 
@@ -52,7 +71,9 @@ while True:
 
     elif comando == 'sair':
         break
-
+    
     lista.append(comando)
     print('\nTAREFAS:')
     print_lista(lista)
+
+    escrever_JSON(lista)

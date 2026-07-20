@@ -9,6 +9,7 @@
 # refazer = todo ['fazer café']
 # refazer = todo ['fazer café', 'caminhar']
 import os
+import json
 
 
 def listar(tarefas):
