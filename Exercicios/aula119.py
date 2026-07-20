@@ -21,7 +21,7 @@ def print_lista(lista):
 
 def escrever_JSON(lista):
     with open(caminho_arquivo, 'w', encoding='utf8') as arquivo:
-        json.dump(lista, arquivo)
+        json.dump(lista, arquivo, indent=2, ensure_ascii=False)
 
 lista = []
 desfazer = []

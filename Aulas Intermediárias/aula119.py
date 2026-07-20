@@ -8,8 +8,8 @@
 # desfazer = [] -> Refazer ['caminhar', 'fazer café']
 # refazer = todo ['fazer café']
 # refazer = todo ['fazer café', 'caminhar']
-import os
 import json
+import os
 
 
 def listar(tarefas):
@@ -17,11 +17,12 @@ def listar(tarefas):
     if not tarefas:
         print('Nenhuma tarefa para listar')
         return
+
     print('Tarefas:')
     for tarefa in tarefas:
         print(f'\t{tarefa}')
     print()
-    listar(tarefas)
+
 
 def desfazer(tarefas, tarefas_refazer):
     print()
@@ -48,6 +49,7 @@ def refazer(tarefas, tarefas_refazer):
     print()
     listar(tarefas)
 
+
 def adicionar(tarefa, tarefas):
     print()
     tarefa = tarefa.strip()
@@ -57,9 +59,29 @@ def adicionar(tarefa, tarefas):
     print(f'{tarefa=} adicionada na lista de tarefas.')
     tarefas.append(tarefa)
     print()
+    listar(tarefas)
 
 
-tarefas = []
+def ler(tarefas, caminho_arquivo):
+    dados = []
+    try:
+        with open(caminho_arquivo, 'r', encoding='utf8') as arquivo:
+            dados = json.load(arquivo)
+    except FileNotFoundError:
+        print('Arquivo não existe')
+        salvar(tarefas, caminho_arquivo)
+    return dados
+
+
+def salvar(tarefas, caminho_arquivo):
+    dados = tarefas
+    with open(caminho_arquivo, 'w', encoding='utf8') as arquivo:
+        dados = json.dump(tarefas, arquivo, indent=2, ensure_ascii=False)
+    return dados
+
+
+CAMINHO_ARQUIVO = 'aula119.json'
+tarefas = ler([], CAMINHO_ARQUIVO)
 tarefas_refazer = []
 
 while True:
@@ -70,11 +92,13 @@ while True:
         'listar': lambda: listar(tarefas),
         'desfazer': lambda: desfazer(tarefas, tarefas_refazer),
         'refazer': lambda: refazer(tarefas, tarefas_refazer),
-        'clear': lambda: os.system('cls'),
+        'clear': lambda: os.system('clear'),
         'adicionar': lambda: adicionar(tarefa, tarefas),
     }
-    comando = comandos.get(tarefa) if comandos.get(tarefa) is not None else comandos['adicionar'] 
+    comando = comandos.get(tarefa) if comandos.get(tarefa) is not None else \
+        comandos['adicionar']
     comando()
+    salvar(tarefas, CAMINHO_ARQUIVO)
 
     # if tarefa == 'listar':
     #     listar(tarefas)
