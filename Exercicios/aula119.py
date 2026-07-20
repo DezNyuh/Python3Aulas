@@ -8,6 +8,7 @@
 # desfazer = [] -> Refazer ['caminhar', 'fazer café']
 # refazer = todo ['fazer café']
 # refazer = todo ['fazer café', 'caminhar']
+import os
 
 def print_lista(lista):
     for i in lista:
@@ -43,6 +44,10 @@ while True:
         else:
             lista.append(desfazer.pop())
         print_lista(lista)
+        continue
+
+    elif comando == 'clear':
+        os.system('cls')
         continue
 
     elif comando == 'sair':
