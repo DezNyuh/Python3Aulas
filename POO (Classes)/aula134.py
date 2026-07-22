@@ -36,4 +36,4 @@ escritor.ferramenta = maquina_de_escrever
 
 print(caneta.escrever())
 print(maquina_de_escrever.escrever())
-print(escritor.ferramenta.escrever())
+print(escritor.ferramenta.escrever())   
