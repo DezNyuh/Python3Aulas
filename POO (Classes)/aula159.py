@@ -5,34 +5,18 @@
 # Em resumo: dataclasses são syntax sugar para criar classes normais.
 # Foi descrito na PEP 557 e adicionado na versão 3.7 do Python.
 # doc: https://docs.python.org/3/library/dataclasses.html
-from dataclasses import dataclass
+from dataclasses import asdict, astuple, dataclass
 
 
-@dataclass(order=True)
+@dataclass
 class Pessoa:
     nome: str
     sobrenome: str
 
-    # def __init__(self, nome, sobrenome):
-    #     self.nome = nome
-    #     self.sobrenome = sobrenome
-    #     self.nome_completo = f'{self.nome} {self.sobrenome}'
-
-    # def __post_init__(self):
-    #     print('POST INIT')
-        
-
-    # @property
-    # def nome_completo(self):
-    #     return f'{self.nome} {self.sobrenome}'
-
-    # @nome_completo.setter
-    # def nome_completo(self, valor):
-    #     nome, self.sobrenome = valor.split()
-    #     self.nome = nome
-    #     self.sobrenome = ''.join(self.sobrenome)
 
 if __name__ == '__main__':
-    lista = [Pessoa('A', 'Z'), Pessoa('B', 'Y'), Pessoa('C', 'X')]
-    ordenadas = sorted(lista, reverse=True, key=lambda p: p.sobrenome)
-    print(ordenadas)
+    p1 = Pessoa('Luiz', 'Otávio')
+    print(asdict(p1).keys())
+    print(asdict(p1).values())
+    print(asdict(p1).items())
+    print(astuple(p1)[0])
