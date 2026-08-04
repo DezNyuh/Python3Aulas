@@ -1,8 +1,6 @@
-# Ambiente virtual Python
 venv/
-
-# Cache do Python
 __pycache__/
 *.pyc
 .env
 private.txt
+drivers
